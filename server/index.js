@@ -9,6 +9,7 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+app.use('/leads', express.static('UI'))
 /* app.use(express.static('./views')) */
 
 router(app)

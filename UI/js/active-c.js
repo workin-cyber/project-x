@@ -253,28 +253,27 @@
         var vis =$(this).children("h3:visible")
         var hid =$(this).children("h3:hidden").removeAttr("hidden");        
         vis.attr('hidden','hidden');        
-    },
+    });
 
-    $("form").submit(function(e){
-        // $('.success').hide();
-        e.preventDefault();
-        var frm= $(this).serialize();
-         frm+='&srcPage=Cyber'
-        $.ajax({
-            method: 'POST',
-            url: "mail.php",
-            data: frm,
-            // datatype: 'json',
-            success: function(){
-                $('.success-msg').fadeIn(700);
-                window.setTimeout(function() {
-                    window.location.href = 'thankyou.html';
-                }, 3000);
-            },
-            error: function(e,a){
-            }
-        }
-        );
-    })
-);
+    // $("form").submit(function(e){
+    //     // $('.success').hide();
+    //     e.preventDefault();
+    //     var frm= $(this).serialize();
+    //      frm+='&srcPage=Cyber'
+    //     $.ajax({
+    //         method: 'POST',
+    //         url: "mail.php",
+    //         data: frm,
+    //         // datatype: 'json',
+    //         success: function(){
+    //             $('.success-msg').fadeIn(700);
+    //             window.setTimeout(function() {
+    //                 window.location.href = 'thankyou.html';
+    //             }, 3000);
+    //         },
+    //         error: function(e,a){
+    //         }
+    //     }
+    //     );
+    // })
 })(jQuery);

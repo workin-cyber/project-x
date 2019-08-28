@@ -49,11 +49,11 @@ General = DL => {
         let res = await DL.read("Status_Person", { "person_id": id })
         if (!res) return {}
 
-        var maxDate = new Date(Math.max.apply(null, res.map(e => {
+        let maxDate = new Date(Math.max.apply(null, res.map(e => {
             return new Date(e.date);
         })));
-        var maxDateObject = res.filter(e => {
-            var d = new Date(e.date);
+        let maxDateObject = res.filter(e => {
+            let d = new Date(e.date);
             return d.getTime() == maxDate.getTime();
         })[0];
 

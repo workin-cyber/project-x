@@ -658,6 +658,9 @@ header {
   .main_header_area {
     height: 70px;
   }
+  .main_header_area.sticky {
+    height: 70px;
+  }
 }
 
 #aplandmenu a {
@@ -809,6 +812,7 @@ header {
     padding: 0;
     background-attachment: unset;
   }
+  
 
 }
 
@@ -1930,8 +1934,10 @@ header {
 
 .success-msg {
   color: #ffffff;
-  padding-top: 15px;
+  padding-top: -5px;
+  margin-top: -20px;
   display: none;
+  direction: rtl;
 }
 
 .error,
