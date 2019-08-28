@@ -10,7 +10,7 @@ let person;
 
 $(function () {
     let id = document.location.pathname.split('/leads/')[1]
-    // return false;
+    return false;
     $.ajax({
         type: 'GET',
         url: '/login/' + id,
@@ -37,11 +37,12 @@ $(function () {
 
 $("form").submit(function(e){
     const status = document.querySelector('input[name="radio"]:checked').value;
+    const id = document.location.pathname.split('/leads/')[1]
     e.preventDefault();
     $.ajax({
         type: 'PUT',
         url: '/status/',
-        data: { person_id: person.person_id, status_id: status },
+        data: { person_id: id, status_id: status },
         success: function (data) {
             $('.success-msg').empty().append(`<span>${data}</span>`).fadeIn(700);
             // window.setTimeout(function() {
