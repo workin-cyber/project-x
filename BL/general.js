@@ -63,7 +63,7 @@ General = DL => {
 
     async function createStatusPerson(id) {
 
-        let table = 'Status_Person', date = new Date().toLocaleDateString();
+        let table = 'Status_Person', date = new Date().toLocaleString();
         console.log(date)
         try {
             let query_string = `INSERT INTO ${table} (person_id, status_id, date) VALUES ('${id}', '0', '${date}')`
