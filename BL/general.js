@@ -7,7 +7,7 @@ General = DL => {
             let person_statuses = await getStatusPersonById(person.person_id);
             
 
-            now = new Date()
+            const now = new Date()
             if (!person_statuses || new Date(person_statuses.date) <= new Date(now.setHours(now.getHours() - 1)))
                 person_statuses.status_id = await createStatusPerson(id)
 
@@ -66,9 +66,10 @@ General = DL => {
         let table = 'Status_Person', date = new Date().toLocaleDateString();
         console.log(date)
         try {
-            let query_string = `INSERT INTO ${table} (person_id, status_id, date) VALUES ('${id}','0','${date}')`
+            let query_string = `INSERT INTO ${table} (person_id, status_id, date) VALUES ('${id}', '0', '${date}')`
 
             let res = await DL.create(query_string)
+            console.log("createStatusPerson success!!")
             return 0;
         }
         catch (err) {
