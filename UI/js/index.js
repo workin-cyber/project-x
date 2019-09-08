@@ -9,8 +9,9 @@
 let person;
 
 $(function () {
-    let id = document.location.pathname.split('/leads/')[1]
     return false;
+    let id = document.location.pathname.split('/leads/')[1]
+    
     $.ajax({
         type: 'GET',
         url: '/login/' + id,

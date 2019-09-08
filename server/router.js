@@ -6,6 +6,7 @@ const Router = app => {
 
     app.get('/leads/:id', async function (req, res) {
         const { id } = req.params
+        console.log(id)
         let result = await BL.general.full_login(id)
         res.render('index', result)
     });

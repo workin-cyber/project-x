@@ -3,9 +3,9 @@ General = DL => {
     async function full_login(id) {
         // TODO: בדיקות תקינות ל-id
         const person = await getPersonById(id);
-
         if (person) {
             let person_statuses = await getStatusPersonById(person.person_id);
+            
 
             now = new Date()
             if (!person_statuses || new Date(person_statuses.date) <= new Date(now.setHours(now.getHours() - 1)))
@@ -13,6 +13,7 @@ General = DL => {
 
             console.log(person_statuses)
             let course_values = await getCourseValuesById(person.course_id)
+
             if (!course_values) {
                 return {}
             }
@@ -62,7 +63,8 @@ General = DL => {
 
     async function createStatusPerson(id) {
 
-        let table = 'Status_Person', date = new Date().toLocaleString();
+        let table = 'Status_Person', date = new Date().toLocaleDateString();
+        console.log(date)
         try {
             let query_string = `INSERT INTO ${table} (person_id, status_id, date) VALUES ('${id}','0','${date}')`
 
