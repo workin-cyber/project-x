@@ -20,6 +20,6 @@ app.use('/leads', express.static('UI'))
 
 router(app)
 console.log('serverrrr')
-var port = process.env.port || 1234;
+const port = process.env.PORT || 1234;
 // app.listen(config.port, () => console.log(`Server is running: ${config.port}`))
 app.listen(port, () => console.log(`Server is running: ${port}`))
