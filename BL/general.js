@@ -6,9 +6,10 @@ General = DL => {
         if (person) {
             let person_statuses = await getStatusPersonById(person.person_id);
             
-
             const now = new Date()
+            console.log(person_statuses.date)
             if (!person_statuses || new Date(person_statuses.date) <= new Date(now.setHours(now.getHours() - 1)))
+                person_statuses={}
                 person_statuses.status_id = await createStatusPerson(id)
 
             console.log(person_statuses)
@@ -63,13 +64,11 @@ General = DL => {
 
     async function createStatusPerson(id) {
 
-        let table = 'Status_Person', date = new Date().toLocaleString();
-        console.log(date)
+        let table = 'Status_Person', date = new Date().getTime();
+        
         try {
             let query_string = `INSERT INTO ${table} (person_id, status_id, date) VALUES ('${id}', '0', '${date}')`
-
             let res = await DL.create(query_string)
-            console.log("createStatusPerson success!!")
             return 0;
         }
         catch (err) {
@@ -100,7 +99,7 @@ General = DL => {
 
     async function update_status(person_id, status_id) {
         max_status = await getStatusPersonById(person_id)
-        let table = 'Status_Person', date = new Date().toLocaleString();
+        let table = 'Status_Person', date = new Date().getTime();
         try {
             let query_string = `UPDATE ${table} SET status_id= ${status_id},date= '${date}' 
             WHERE person_id=${person_id} AND status_person_id = ${max_status.status_person_id}`
