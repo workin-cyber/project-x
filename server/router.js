@@ -6,7 +6,6 @@ const Router = app => {
 
     app.get('/leads/:id', async function (req, res) {
         const { id } = req.params
-        console.log(id)
         let result = await BL.general.full_login(id)
         res.render('index', result)
     });
@@ -21,6 +20,7 @@ const Router = app => {
 
     app.put('/status', async (req, res) => {
         const { body } = req
+        if (!body || !body.person_id || !body.status_id) res.status(400).send({message:'data is null'});
         result = await BL.general.update_status(body.person_id, body.status_id)
         switch (body.status_id) {
             case "1":

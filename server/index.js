@@ -19,7 +19,8 @@ app.use('/leads', express.static('UI'))
 /* app.use(express.static('./views')) */
 
 router(app)
-console.log('serverrrr')
 const port = process.env.PORT || 1234;
 // app.listen(config.port, () => console.log(`Server is running: ${config.port}`))
 app.listen(port, () => console.log(`Server is running: ${port}`))
+
+// console.log(router)

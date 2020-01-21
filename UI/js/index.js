@@ -37,15 +37,16 @@ $(function () {
 },
 
 $("form").submit(function(e){
-    const status = document.querySelector('input[name="radio"]:checked').value;
+    const status = document.querySelector('input[name="radio"]:checked');
     const id = document.location.pathname.split('/leads/')[1]
+    if(!status || !id) return false;
     e.preventDefault();
     $.ajax({
         type: 'PUT',
         url: '/status/',
-        data: { person_id: id, status_id: status },
+        data: { person_id: id, status_id: status.value },
         success: function (data) {
-            $('.success-msg').empty().append(`<span>${data}</span>`).fadeIn(700);
+            $('.success-msg').empty().append(`<span>${data}</span>`).fadeIn(600);
             // window.setTimeout(function() {
             //     window.location.href = 'thankyou.html';
             // }, 3000);

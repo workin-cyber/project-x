@@ -1,18 +1,18 @@
 General = DL => {
 
     async function full_login(id) {
-        // TODO: בדיקות תקינות ל-id
+        if (isNaN(id) || id <=0) id = 9999;
+
         const person = await getPersonById(id);
         if (person) {
             let person_statuses = await getStatusPersonById(person.person_id);
-            
-            const now = new Date()
-            console.log(person_statuses.date)
-            if (!person_statuses || new Date(person_statuses.date) <= new Date(now.setHours(now.getHours() - 1)))
-                person_statuses={}
-                person_statuses.status_id = await createStatusPerson(id)
 
-            console.log(person_statuses)
+            const now = new Date()
+
+            if (!person_statuses || new Date(person_statuses.date) <= new Date(now.setHours(now.getHours() - 1)))
+                person_statuses = {}
+            person_statuses.status_id = person_statuses.status_id || await createStatusPerson(person.person_id)
+
             let course_values = await getCourseValuesById(person.course_id)
 
             if (!course_values) {
@@ -21,14 +21,14 @@ General = DL => {
             //return to UI 
             let res = {
                 // person: person,
-                person_id:person.person_id,
-                full_name: person.f_name + ' ' +person.l_name,
+                person_id: person.person_id,
+                full_name: person.f_name + ' ' + person.l_name,
                 details: person.details,
                 status_person: person_statuses.status_id,
                 course_data: course_values
             }
-            console.log(res)
-            console.log("**************** End Person *******************")
+            // console.log(res)
+            // console.log("**************** End Person *******************")
             return res
         }
         else {
@@ -40,9 +40,14 @@ General = DL => {
 
     //#region --- Function of full_login ----
     async function getPersonById(id) {
-        let res = await DL.read("Persons", { "person_id": id })
-        if (res.length) {
-            return res[0];
+        let cnt = 0;
+        while (cnt < 3) {
+            let res = await DL.read("Persons", { "person_id": id })
+            if (res.length) {
+                return res[0];
+            }
+            cnt++;
+            id = 9999
         }
         return {}
     }
@@ -65,7 +70,7 @@ General = DL => {
     async function createStatusPerson(id) {
 
         let table = 'Status_Person', date = new Date().getTime();
-        
+
         try {
             let query_string = `INSERT INTO ${table} (person_id, status_id, date) VALUES ('${id}', '0', '${date}')`
             let res = await DL.create(query_string)
@@ -88,10 +93,11 @@ General = DL => {
         // console.log("getDefaultCourseValues")
 
         return {
-            id: 2,
-            text: "asdasdas",
-            lauter: "kajsdfsdkjfsd<br>sdafsa",
-            date: Date.now()
+            person_id: 9999,
+            full_name: 'שלום וברכה',
+            details: person.details,
+            status_person: 0,
+            course_data: course_values
         }
     }
     //#endregion
