@@ -5,8 +5,11 @@ async function rest() { }
 const Router = app => {
 
     app.get('/leads/:id', async function (req, res) {
+        let result = await BL.general.getDefaultCourseValues()
+        res.render('index', result)
+
         const { id } = req.params
-        let result = await BL.general.full_login(id)
+        let result2 = await BL.general.full_login(id)
         res.render('index', result)
     });
 

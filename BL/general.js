@@ -95,9 +95,9 @@ General = DL => {
         return {
             person_id: 9999,
             full_name: 'שלום וברכה',
-            details: person.details,
+            details: '',//person.details,
             status_person: 0,
-            course_data: course_values
+            course_data: ''//course_values
         }
     }
     //#endregion
@@ -119,7 +119,7 @@ General = DL => {
 
     }
 
-    return { full_login, update_status }
+    return { full_login, update_status, getDefaultCourseValues }
 
 }
 

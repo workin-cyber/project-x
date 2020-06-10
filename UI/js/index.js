@@ -9,7 +9,7 @@
 let person;
 
 $(function () {
-    return false;
+    // return false;
     let id = document.location.pathname.split('/leads/')[1]
     
     $.ajax({

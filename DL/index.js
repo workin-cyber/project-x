@@ -7,6 +7,7 @@ const con = mysql.createConnection({
 });
 
 con.connect(async function (err) {
+    return true;
     if (err) throw err;
     console.log("DB Connected!")
 })
